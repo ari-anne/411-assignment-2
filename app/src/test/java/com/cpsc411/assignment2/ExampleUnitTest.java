@@ -1,4 +1,4 @@
-package com.cpsc411.assignment2pt1;
+package com.cpsc411.assignment2;
 
 import org.junit.Test;
 

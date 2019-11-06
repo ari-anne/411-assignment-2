@@ -1,4 +1,4 @@
-package com.cpsc411.assignment2pt1.model;
+package com.cpsc411.assignment2.model;
 
 public class CourseEnrollment {
 

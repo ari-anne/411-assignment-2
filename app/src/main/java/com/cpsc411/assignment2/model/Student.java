@@ -1,4 +1,4 @@
-package com.cpsc411.assignment2pt1.model;
+package com.cpsc411.assignment2.model;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,12 @@ public class Student {
     protected int mCWID;
 
     protected ArrayList<CourseEnrollment> mCourses;
+
+    public Student() {
+        mFirstName = "";
+        mLastName = "";
+        mCWID = 0;
+    }
 
     public Student(String fName, String lName, int cwid) {
         mFirstName = fName;

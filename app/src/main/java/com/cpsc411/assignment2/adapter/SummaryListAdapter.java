@@ -1,14 +1,16 @@
-package com.cpsc411.assignment2pt1.adapter;
+package com.cpsc411.assignment2.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cpsc411.assignment2pt1.R;
-import com.cpsc411.assignment2pt1.model.Student;
-import com.cpsc411.assignment2pt1.model.StudentDB;
+import com.cpsc411.assignment2.R;
+import com.cpsc411.assignment2.StudentDetails;
+import com.cpsc411.assignment2.model.Student;
+import com.cpsc411.assignment2.model.StudentDB;
 
 public class SummaryListAdapter extends BaseAdapter {
     @Override
@@ -28,14 +30,11 @@ public class SummaryListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View row_view;
+        View row_view = convertView;
 
-        if(convertView == null) {
+        if(row_view == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            row_view = inflater.inflate(R.layout.student_row, parent, false);
-        }
-        else {
-            row_view = convertView;
+            row_view = inflater.inflate(R.layout.summary_list_row, parent, false);
         }
 
         Student s = StudentDB.getInstance().getStudentList().get(position);
@@ -43,6 +42,18 @@ public class SummaryListAdapter extends BaseAdapter {
         ((TextView) row_view.findViewById(R.id.first_name)).setText(s.getFirstName());
         ((TextView) row_view.findViewById(R.id.last_name)).setText(s.getLastName());
         ((TextView) row_view.findViewById(R.id.cwid)).setText(Integer.toString(s.getCWID()));
+        row_view.setTag(new Integer(position));
+
+        row_view.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), StudentDetails.class);
+                        intent.putExtra("StudentIndex", ((Integer)v.getTag()).intValue());
+                        v.getContext().startActivity(intent);
+                    }
+                }
+        );
 
         return row_view;
     }
